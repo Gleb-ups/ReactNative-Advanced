@@ -7,6 +7,7 @@ import {
   FlatList,
   ActivityIndicator,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import TaskItem from '../tasks/TaskItem';
 import API from '../../service/todoApi';
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     color: '#323232',
     marginLeft: '10%',
     marginTop: '15%',
+    marginBottom: '10%',
   },
   indicator: {
     flex: 1,
@@ -34,9 +36,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     marginTop: '29%',
     backgroundColor: '#FFE3D3',
-    width: 81,
+    width: 83,
     height: 48,
-    right: -10,
+    right: -12,
     maxHeight: 48,
     borderRadius: 13,
     alignSelf: 'flex-end',
@@ -50,6 +52,32 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontSize: 18,
     color: '#000000',
+  },
+  actionView: {
+    position: 'absolute',
+    bottom: '5%',
+    right: '6%',
+    backgroundColor: '#FFE3D3',
+    width: 51,
+    height: 51,
+    maxHeight: 51,
+    maxWidth: 51,
+    borderRadius: 25,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+  actionButton: {
+    width: '100%',
+    height: '100%',
+    alignSelf: 'stretch',
+  },
+  actionText: {
+    fontFamily: 'Roboto',
+    fontWeight: '700',
+    fontStyle: 'normal',
+    fontSize: 34.2,
+    color: '#323232',
+    alignSelf: 'center',
   },
 });
 
@@ -103,6 +131,13 @@ class Tasks extends Component {
         />
         <View style={styles.bookMark}>
           <Text style={styles.bookMarkText}>13</Text>
+        </View>
+        <View style={styles.actionView}>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => this.props.navigation.navigate('AddTask')}>
+            <Text style={styles.actionText}>+</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     ) : (

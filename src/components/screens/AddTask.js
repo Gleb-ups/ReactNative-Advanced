@@ -91,17 +91,6 @@ class AddTask extends Component {
       <View style={styles.container}>
         <StatusBar translucent hidden />
         <Text style={styles.welcome}>New task</Text>
-        <Text style={styles.fieldName}>Task name</Text>
-        <TextInput
-          name="taskName"
-          style={styles.inputField}
-          placeholder="Enter task name..."
-          value={this.state.taskName}
-          onChangeText={(taskName) => this.setState({taskName})}
-        />
-        <TouchableOpacity style={styles.loginButton}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
       </View>
     );
   }

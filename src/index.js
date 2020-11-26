@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from './components/screens/Login';
 import Tasks from './components/screens/Tasks';
+import AddTask from './components/screens/AddTask';
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Tasks" component={Tasks} />
+        <Stack.Screen name="AddTask" component={AddTask} />
       </Stack.Navigator>
     </NavigationContainer>
   );
