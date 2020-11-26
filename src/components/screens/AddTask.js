@@ -12,15 +12,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  loginComps: {
+  createComps: {
     backgroundColor: '#FFFFFF',
     flex: 1,
     alignSelf: 'stretch',
     marginHorizontal: '10%',
-    marginVertical: '18%',
+    marginTop: '28%',
   },
   welcome: {
     fontFamily: 'Roboto',
@@ -54,8 +53,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     elevation: 4,
     paddingLeft: '4%',
+    textAlignVertical: 'top',
+    maxHeight: '35%',
   },
-  loginButton: {
+  createButton: {
     backgroundColor: '#FFE3D3',
     marginHorizontal: '7%',
     marginBottom: '9%',
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     borderRadius: 10,
   },
-  loginText: {
+  createText: {
     fontFamily: 'Roboto',
     fontWeight: '900',
     fontStyle: 'normal',
@@ -86,11 +87,29 @@ class AddTask extends Component {
     };
   }
 
+  createTask = async () => {
+    this.props.navigation.navigate('Tasks');
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <StatusBar translucent hidden />
         <Text style={styles.welcome}>New task</Text>
+        <View style={styles.createComps}>
+          <Text style={styles.fieldName}>Task name</Text>
+          <TextInput
+            style={styles.inputField}
+            placeholder="Enter task name..."
+            value={this.state.taskName}
+            multiline={true}
+            numberOfLines={6}
+            onChangeText={(taskName) => this.setState({taskName})}
+          />
+        </View>
+        <TouchableOpacity style={styles.createButton} onPress={this.createTask}>
+          <Text style={styles.createText}>Create</Text>
+        </TouchableOpacity>
       </View>
     );
   }

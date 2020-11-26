@@ -85,7 +85,9 @@ class Tasks extends Component {
   state = {
     data: [],
     loading: true,
+    doneCount: 13,
   };
+
   componentDidMount() {
     this._fetchAllTodos();
   }
@@ -101,13 +103,14 @@ class Tasks extends Component {
       })
       .catch((error) => {
         console.log(error);
-        // this.setState({error, loading: false});
       });
-    // this.setState(() => ({loading: false}));
+  };
+
+  toCreateTask = async () => {
+    this.props.navigation.navigate('AddTask');
   };
 
   render() {
-    console.log(this.state.loading);
     return !this.state.loading ? (
       <SafeAreaView style={styles.container}>
         <StatusBar translucent hidden />
@@ -130,12 +133,12 @@ class Tasks extends Component {
           keyExtractor={(item) => item.id.toString()}
         />
         <View style={styles.bookMark}>
-          <Text style={styles.bookMarkText}>13</Text>
+          <Text style={styles.bookMarkText}>{this.state.doneCount}</Text>
         </View>
         <View style={styles.actionView}>
           <TouchableOpacity
             style={styles.actionButton}
-            onPress={() => this.props.navigation.navigate('AddTask')}>
+            onPress={this.toCreateTask}>
             <Text style={styles.actionText}>+</Text>
           </TouchableOpacity>
         </View>
