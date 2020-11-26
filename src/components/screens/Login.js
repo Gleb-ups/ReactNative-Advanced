@@ -98,7 +98,6 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar translucent hidden />
         <Text style={styles.welcome}>Welcome to a todo app</Text>
         <View style={styles.loginComps}>
           <Text style={styles.fieldName}>Email</Text>

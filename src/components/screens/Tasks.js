@@ -113,7 +113,6 @@ class Tasks extends Component {
   render() {
     return !this.state.loading ? (
       <SafeAreaView style={styles.container}>
-        <StatusBar translucent hidden />
         <Text style={styles.welcome}>Tasks</Text>
         <FlatList
           contentContainerStyle={{
@@ -146,7 +145,6 @@ class Tasks extends Component {
     ) : (
       <SafeAreaView style={styles.container}>
         <Text style={styles.welcome}>Tasks</Text>
-        <StatusBar translucent hidden />
         <ActivityIndicator animating size={'large'} color={'#FFE3D3'} />
       </SafeAreaView>
     );

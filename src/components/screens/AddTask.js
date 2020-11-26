@@ -94,7 +94,6 @@ class AddTask extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar translucent hidden />
         <Text style={styles.welcome}>New task</Text>
         <View style={styles.createComps}>
           <Text style={styles.fieldName}>Task name</Text>

@@ -1,21 +1,18 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Login from './components/screens/Login';
-import Tasks from './components/screens/Tasks';
-import AddTask from './components/screens/AddTask';
+import {Provider} from 'react-redux';
+import persist from './config/store';
+import All from './components/screens/All';
+import {PersistGate} from 'redux-persist/integration/react';
 
-const Stack = createStackNavigator();
+const persistStore = persist();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Tasks" component={Tasks} />
-        <Stack.Screen name="AddTask" component={AddTask} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={persistStore.store}>
+      <PersistGate loading={null} persistor={persistStore.persistor}>
+        <All />
+      </PersistGate>
+    </Provider>
   );
 };
 
