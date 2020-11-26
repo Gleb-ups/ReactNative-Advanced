@@ -5,8 +5,10 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  StatusBar,
 } from 'react-native';
+import {loginUser} from '../../actions/auth.actions';
+import {connect} from 'react-redux';
+import Loader from '../Loader';
 
 const styles = StyleSheet.create({
   container: {
@@ -89,15 +91,17 @@ class Login extends Component {
   }
 
   loginUser = async () => {
-    // auth user
-    // and log user credentials only for testing!!!
-    console.log(this.state.email, this.state.password);
-    this.props.navigation.navigate('Tasks');
+    await this.props.dispatch(
+      loginUser({
+        data: {email: this.state.email, password: this.state.password},
+      }),
+    );
   };
 
   render() {
     return (
       <View style={styles.container}>
+        {this.props.loginUser && this.props.loginUser.isLoading && <Loader />}
         <Text style={styles.welcome}>Welcome to a todo app</Text>
         <View style={styles.loginComps}>
           <Text style={styles.fieldName}>Email</Text>
@@ -130,4 +134,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  loginUser: state.authReducer.loginUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

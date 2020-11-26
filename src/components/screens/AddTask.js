@@ -5,8 +5,9 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  StatusBar,
 } from 'react-native';
+import {logoutUser} from '../../actions/auth.actions';
+import {connect} from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -88,7 +89,9 @@ class AddTask extends Component {
   }
 
   createTask = async () => {
-    this.props.navigation.navigate('Tasks');
+    const response = await this.props.dispatch(logoutUser());
+    console.log(response);
+    // this.props.navigation.navigate('Tasks');
   };
 
   render() {
@@ -114,4 +117,12 @@ class AddTask extends Component {
   }
 }
 
-export default AddTask;
+const mapStateToProps = (state) => ({
+  getUser: state.userReducer.getUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTask);

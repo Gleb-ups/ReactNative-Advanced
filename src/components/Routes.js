@@ -12,9 +12,16 @@ export default class Routes extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Tasks" component={Tasks} />
-          <Stack.Screen name="AddTask" component={AddTask} />
+          {this.props.isLoggedIn ? (
+            <>
+              <Stack.Screen name="Tasks" component={Tasks} />
+              <Stack.Screen name="AddTask" component={AddTask} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={Login} />
+            </>
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     );

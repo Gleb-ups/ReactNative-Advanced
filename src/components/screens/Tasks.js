@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   View,
-  StatusBar,
   SafeAreaView,
   FlatList,
   ActivityIndicator,
@@ -11,6 +10,7 @@ import {
 } from 'react-native';
 import TaskItem from '../tasks/TaskItem';
 import API from '../../service/todoApi';
+import {connect} from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -151,4 +151,12 @@ class Tasks extends Component {
   }
 }
 
-export default Tasks;
+const mapStateToProps = (state) => ({
+  getUser: state.userReducer.getUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tasks);
