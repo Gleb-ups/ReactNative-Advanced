@@ -87,10 +87,12 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      isFirstRun: true,
     };
   }
 
   loginUser = async () => {
+    this.setState({isFirstRun: false});
     await this.props.dispatch(
       loginUser({
         data: {email: this.state.email, password: this.state.password},
@@ -101,7 +103,9 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.loginUser && this.props.loginUser.isLoading && <Loader />}
+        {!this.state.isFirstRun &&
+          this.props.loginUser &&
+          this.props.loginUser.isLoading && <Loader />}
         <Text style={styles.welcome}>Welcome to a todo app</Text>
         <View style={styles.loginComps}>
           <Text style={styles.fieldName}>Email</Text>

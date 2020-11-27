@@ -3,10 +3,12 @@ import {reducer as formReducer} from 'redux-form';
 
 import authReducer from './auth.reducer';
 import userReducer from './user.reducer';
+import tasksReducer from './tasks.reducer';
 
 const reducers = {
   authReducer,
   userReducer,
+  tasksReducer,
   form: formReducer,
 };
 

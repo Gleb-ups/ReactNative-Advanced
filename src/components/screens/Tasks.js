@@ -85,25 +85,39 @@ class Tasks extends Component {
   state = {
     data: [],
     loading: true,
-    doneCount: 13,
+    doneCount: 0,
   };
 
   componentDidMount() {
-    this._fetchAllTodos();
+    this.refresh();
   }
 
-  _fetchAllTodos = () => {
+  refresh() {
+    this._fetchAllTodos().then(() => this.setState({loading: false}));
+  }
+
+  _fetchAllTodos = async () => {
     const URL = 'todos/';
-    API.get(URL)
+    await API.get(URL)
       .then((response) => {
         this.setState(() => ({
           data: Array.from(response.data.slice(0, 20)),
-          loading: false,
         }));
       })
       .catch((error) => {
         console.log(error);
       });
+    let data = this.state.data;
+    const lastId = data.length !== 0 ? data[data.length - 1].id : 0;
+    this.props.getTasks.tasks.forEach((task, index) => {
+      data.push({
+        userId: null,
+        id: lastId + index + 1,
+        title: task.title,
+        completed: false,
+      });
+    });
+    this.setState(() => ({data: data, doneCount: data.length}));
   };
 
   toCreateTask = async () => {
@@ -153,6 +167,7 @@ class Tasks extends Component {
 
 const mapStateToProps = (state) => ({
   getUser: state.userReducer.getUser,
+  getTasks: state.tasksReducer.getTasks,
 });
 
 const mapDispatchToProps = (dispatch) => ({

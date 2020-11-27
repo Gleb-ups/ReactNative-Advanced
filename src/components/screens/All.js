@@ -9,7 +9,6 @@ class All extends Component {
     const {
       authData: {isLoggedIn},
     } = this.props;
-    console.log(isLoggedIn);
     return (
       <View style={styles.container}>
         <StatusBar translucent hidden />

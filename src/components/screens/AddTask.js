@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {logoutUser} from '../../actions/auth.actions';
+import {addTask} from '../../actions/tasks.actions';
 import {connect} from 'react-redux';
 
 const styles = StyleSheet.create({
@@ -89,9 +89,11 @@ class AddTask extends Component {
   }
 
   createTask = async () => {
-    const response = await this.props.dispatch(logoutUser());
-    console.log(response);
-    // this.props.navigation.navigate('Tasks');
+    await this.props.dispatch(addTask({title: this.state.taskName}));
+    this.props.navigation.reset({
+      index: 0,
+      routes: [{name: 'Tasks'}],
+    });
   };
 
   render() {
@@ -119,6 +121,7 @@ class AddTask extends Component {
 
 const mapStateToProps = (state) => ({
   getUser: state.userReducer.getUser,
+  getTasks: state.tasksReducer.getTasks,
 });
 
 const mapDispatchToProps = (dispatch) => ({

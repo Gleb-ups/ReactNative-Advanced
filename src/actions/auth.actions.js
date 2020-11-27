@@ -3,6 +3,7 @@ export const loginUser = (payload) => {
     dispatch({
       type: 'LOGIN_USER_LOADING',
     });
+    // Fake auth:
     setTimeout(() => {
       dispatch({
         type: 'LOGIN_USER_SUCCESS',
